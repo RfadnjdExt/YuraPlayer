@@ -1,2 +1,2 @@
-import yuraPlayer from './yuraPlayer'
-export default yuraPlayer
+import yuraPlayer from "./yuraPlayer";
+yuraPlayer()

@@ -1,0 +1,1 @@
+type DOMSelector = keyof HTMLElementTagNameMap | 'div#player' | 'ysf-player'
