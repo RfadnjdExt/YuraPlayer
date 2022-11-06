@@ -36,7 +36,7 @@ const yuraPlayer = async() => {
     // const startTime = 0
     // player.initialize(videoStream, url, true, startTime)
 
-    videoStream.setAttribute('src', '')
+    videoStream.setAttribute('src', 'https://jolly-hall-c042.yurasu.workers.dev/?id=1-5UH-KmvkcQ8OcTdCVdtFhaLNdnHHFw7')
     resize()
     new ResizeObserver(resize).observe(document.body)
 
