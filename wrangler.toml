@@ -1,0 +1,3 @@
+name = "jolly-hall-c042"
+main = "wrangler/src/index.ts"
+compatibility_date = "2022-11-06"

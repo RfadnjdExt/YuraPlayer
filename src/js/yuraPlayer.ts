@@ -31,10 +31,12 @@ const yuraPlayer = async() => {
         videoStream.style.height = `${window.innerHeight}px`
     }
 
-    const player = dashjs.MediaPlayer().create()
-    const url = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'
-    const startTime = 0
-    player.initialize(videoStream, url, true, startTime)
+    // const player = dashjs.MediaPlayer().create()
+    // const url = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'
+    // const startTime = 0
+    // player.initialize(videoStream, url, true, startTime)
+
+    videoStream.setAttribute('src', '')
     resize()
     new ResizeObserver(resize).observe(document.body)
 
