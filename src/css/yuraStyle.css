@@ -1,6 +1,25 @@
 
-
-.video-stream {
-    display: block;
+#cinematics.ytd-watch-flexy {
     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#player.ytd-watch-flexy {
+    position: relative;
+}
+#player-container-outer.ytd-watch-flexy {
+    max-width: 1171.56px;
+    min-width: 640px;
+    margin: 0 auto;
+}
+div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+#player-container-inner.ytd-watch-flexy {
+    position: relative;
 }
