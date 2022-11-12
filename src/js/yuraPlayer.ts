@@ -16,8 +16,7 @@ const createElement = (tagName: string, attributesObject?: Attributes) => {
 }
 
 const yuraPlayer = async() => {
-    const player = $('#player')!
-    
+    dashjs.MediaPlayer().create().initialize($('video')!)
 }
 
 export default yuraPlayer
