@@ -17,13 +17,7 @@ const createElement = (tagName: string, attributesObject?: Attributes) => {
 
 const yuraPlayer = async() => {
     const player = $('#player')!
-    player.setAttribute('class', 'ytd-watch-flexy')
-    const cinematics = createElement('div', { id: 'cinematics', class: 'ytd-watch-flexy'})
-    const playercontainerouter = createElement('div', { id: 'player-container-outer', class: 'ytd-watch-flexy'})
-    const playercontainerinner = createElement('div', { id: 'player-container-inner', class: 'ytd-watch-flexy'})
-    playercontainerouter.appendChild(playercontainerinner)
-    player.appendChild(cinematics)
-    player.appendChild(playercontainerouter)
+    
 }
 
 export default yuraPlayer
