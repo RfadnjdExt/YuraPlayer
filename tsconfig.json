@@ -1,5 +1,5 @@
 {
-  "include": ["src/js"],
+  "include": ["src/js", "src/static/subtitles-octopus.js"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 

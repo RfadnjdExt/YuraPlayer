@@ -1,6 +1,6 @@
 import axios from 'axios'
 import dashjs from 'dashjs'
-import SubtitleOctopus from './subtitles-octopus'
+import SubtitleOctopus from '../static/subtitles-octopus'
 
 interface Attributes {
     [key: string]: string
