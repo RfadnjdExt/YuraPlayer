@@ -13,7 +13,7 @@ async function updateAccessToken(env: ENV) {
         refresh_token: env.REFRESH_TOKEN,
         grant_type: 'refresh_token'
     })})
-    const responseDate = response.headers.get('date')
+    const responseDate = response.headers.get('Date')
     const jsonData: { access_token: string, expires_in: number, token_type: string } = await response.json()
     if(!responseDate) throw Error()
     globalData.expired = new Date(responseDate).getTime() + (jsonData.expires_in * 1000)
@@ -21,11 +21,32 @@ async function updateAccessToken(env: ENV) {
     console.log(globalData)
 }
 
+async function getFile(filePath?: string, fileID?: string) {
+    if(filePath) {
+        filePath.split('/').forEach(async function() {
+            
+        })
+    }
+    const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileID}?` + new URLSearchParams({
+        alt: 'media',
+        supportsAllDrives: 'true'
+    }), {
+        headers: {
+            'Authorization': globalData.access_token
+        }
+    })
+    return new Response(response.body, {
+        headers: response.headers
+    })
+}
+
 export default {
     async fetch(request: Request, env: ENV) {
-        // const url = new URL(request.url)
-        // if(url.pathname !== '/') return new Response('', { status: 404 })
-        // if(!globalData.expired || globalData.expired < new Date().getTime()) await updateAccessToken(env)
+        const url = new URL(request.url)
+        if(url.pathname === '/') return new Response('<script src="/script.js">')
+        if(url.pathname === '/script.js') return await getFile
+        if(url.pathname === '/favicon.ico') return new Response('', { status: 404 })
+        if(!globalData.expired || globalData.expired < new Date().getTime()) await updateAccessToken(env)
         // const response = await fetch('https://www.googleapis.com/drive/v3/files?' + new URLSearchParams({
         //     corpora: 'drive',
         //     driveId: '0AKOrYgWhtV5YUk9PVA',
