@@ -1,3 +1,7 @@
-import yuraPlayer from "./yuraPlayer";
+// import yuraPlayer from "./yuraPlayer";
 import "../css/yuraStyle.css"
-yuraPlayer()
+(async function() {
+    import('./yuraPlayer').then(function(yuraPlayer) {
+        yuraPlayer.default()
+    })
+})()

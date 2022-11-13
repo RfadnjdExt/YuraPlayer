@@ -8,9 +8,9 @@ module.exports = {
         compress: true,
         port: 9000
     },
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     entry: './src/js/index.ts',
-    mode: 'development',
+    mode: 'production',
     module: {
         rules: [
             {
@@ -30,5 +30,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
     }
 }

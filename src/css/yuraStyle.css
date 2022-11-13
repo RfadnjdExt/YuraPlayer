@@ -8,6 +8,7 @@
 }
 
 ::-webkit-scrollbar {
+    appearance: none;
     -webkit-appearance: none;
     width: 4px;
     height: 5px;
@@ -48,11 +49,12 @@ article {
 
 article {
     width: calc(33.333% - 13.333px);
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
 article {
-    width: calc(50% - 10px);
+    /* width: calc(50% - 10px); */
+    width: calc(50%);
 }
 
 .post-thumbnail {
@@ -82,8 +84,8 @@ img {
     max-width: 100%;
     font-size: 10px;
     color: transparent;
-    /* width: 100%; */
-    /* height: 100%; */
+    width: 100%;
+    height: 100%;
 }
 
 .post-thumb {
@@ -108,4 +110,9 @@ img {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+video {
+    width: 100%;
+    height: 100%;
 }
