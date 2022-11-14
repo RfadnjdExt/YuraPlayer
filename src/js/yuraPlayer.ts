@@ -19,7 +19,7 @@ const createElement = (tagName: string, attributesObject?: Attributes) => {
 const yuraPlayer = async() => {
     if(location.pathname === '/') {
         const blogPosts = createElement('div', { class: 'blog-posts' })
-        const response = await fetch('https://jolly-hall-c042.yurasu.workers.dev/0:/', {
+        const response = await fetch('/0:/', {
             body: JSON.stringify({
                 page_index: ''
             }),
@@ -27,12 +27,12 @@ const yuraPlayer = async() => {
         })
         const responseData: { data: { files: { mimeType: string, name: string }[] } } = await response.json()
         responseData.data.files.forEach(async function({ mimeType, name }) {
-            if(mimeType !== 'application/vnd.google-apps.folder') return
+            if(mimeType !== 'application/vnd.google-apps.folder' || name === 'assets') return
             const hentry = createElement('article', { class: 'hentry' })
             const postThumbnail = createElement('div', { class: 'post-thumbnail' })
             const postContent = createElement('div', { class: 'post-content' })
             const a = createElement('a', { href: `/${name}` })
-            const img = createElement('img', { class: 'post-thumb', src: `https://jolly-hall-c042.yurasu.workers.dev/0:/${encodeURIComponent(name)}/thumbnail.jpg` })
+            const img = createElement('img', { class: 'post-thumb', src: `/0:/${encodeURIComponent(name)}/thumbnail.jpg` })
             a.appendChild(img)
             postThumbnail.appendChild(a)
             const postHeadline = createElement('div', { class: 'post-headline' })
@@ -51,25 +51,25 @@ const yuraPlayer = async() => {
         const video = createElement('video', { controls: '' })
         if(!video) throw Error()
         import('dashjs').then(function({ default: dashjs }) {
-            dashjs.MediaPlayer().create().initialize(video, `https://jolly-hall-c042.yurasu.workers.dev/0:/${decodeURIComponent(location.pathname.slice(1))}/manifest.mpd`, false)
+            dashjs.MediaPlayer().create().initialize(video, `/0:/${decodeURIComponent(location.pathname.slice(1))}/streams/manifest.mpd`, false)
         })
         
         import('../static/subtitles-octopus').then(async function({ default: SubtitleOctopus }) {
             new SubtitleOctopus({
                 debug: true,
-                fonts: ((await (await fetch(`https://jolly-hall-c042.yurasu.workers.dev/0:/${decodeURIComponent(location.pathname.slice(1))}/fonts`, {
+                fonts: ((await (await fetch(`/0:/${decodeURIComponent(location.pathname.slice(1))}/fonts/`, {
                     body: JSON.stringify({
                         page_index: ''
                     }),
                     method: 'POST'
                 })).json()) as { data: { files: { mimeType: string, name: string }[] } }).data.files.map(function({ name }) {
-                    return `https://jolly-hall-c042.yurasu.workers.dev/0:/${decodeURIComponent(location.pathname.slice(1))}/fonts/${name}`
+                    return `/0:/${decodeURIComponent(location.pathname.slice(1))}/fonts/${name}`
                 }),
                 lazyFileLoading: true,
                 renderMode: 'lossy',
-                subUrl: `https://jolly-hall-c042.yurasu.workers.dev/0:/${decodeURIComponent(location.pathname.slice(1))}/subtitle.br`,
+                subUrl: `/0:/${decodeURIComponent(location.pathname.slice(1))}/subtitle.br`,
                 video: video,
-                workerUrl: 'subtitles-octopus-worker.js'
+                workerUrl: '/0:/assets/subtitles-octopus-worker.js'
             } as {
                 debug: boolean,
                 fonts: string[],
@@ -80,10 +80,11 @@ const yuraPlayer = async() => {
                 workerUrl: string
             })
         })
+        document.body.appendChild(video)
     }
     // console.log(location.pathname)
     // if(location.pathname === '/') {
-    //     const hentrys: { thumbnail: string, title: string, url: string }[] = (await axios.post('https://jolly-hall-c042.yurasu.workers.dev/0:/', {"q":"","password":null,"page_token":null,"page_index":0})).data.data.files.map(async function({mimeType, name}: {mimeType: string, name: string}) {
+    //     const hentrys: { thumbnail: string, title: string, url: string }[] = (await axios.post('/0:/', {"q":"","password":null,"page_token":null,"page_index":0})).data.data.files.map(async function({mimeType, name}: {mimeType: string, name: string}) {
     //         if(mimeType === 'application/vnd.google-apps.folder') return {
     //             thumbnail: `/${name}/thumbnail.png`,
     //             title: name,
